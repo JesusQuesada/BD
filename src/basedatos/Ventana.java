@@ -66,6 +66,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("BASE DE DATOS");
 
         etiqName.setText("Nombre");
 
@@ -233,6 +234,7 @@ public class Ventana extends javax.swing.JFrame {
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getInt("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad")});
             }
+            rs.close();
             } catch (SQLException e) {
             System.out.println(e.getMessage());
             }
@@ -255,6 +257,7 @@ public class Ventana extends javax.swing.JFrame {
             while (rs.next()) {
                 modelo.removeRow(rs.getInt("id"));
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -265,9 +268,10 @@ public class Ventana extends javax.swing.JFrame {
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql2)){
             
-             while (rs.next()) {
+            while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getInt("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad")});
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -279,7 +283,6 @@ public class Ventana extends javax.swing.JFrame {
     private void botonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModActionPerformed
         VentanaMod mod = new VentanaMod();
         mod.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_botonModActionPerformed
 
     private void botonBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBDActionPerformed
@@ -295,6 +298,7 @@ public class Ventana extends javax.swing.JFrame {
             while (rs.next()) {
                 modelo.addRow(new Object[]{rs.getInt("id"), rs.getString("nombre"), rs.getString("apellidos"), rs.getInt("edad")});
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -306,9 +310,10 @@ public class Ventana extends javax.swing.JFrame {
         String sql = "DELETE FROM alumnos";
         
         try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
             
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
